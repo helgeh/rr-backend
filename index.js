@@ -53,7 +53,7 @@ app.get('/feed/:url', (req, res) => {
 });
 
 app.get('*', (req, res) => {
-  res.status(200).end();
+  res.status(404).end();
 });
 
 app.listen(80);
