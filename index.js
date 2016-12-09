@@ -40,11 +40,20 @@ app.get('/feed/:url', (req, res) => {
   };
 
   let error = function(err) {
-    res.status(500).end();
+    res.status(400).end();
   };
 
-  http.get(url, onSuccess, error);
+  try {
+    http.get(url, onSuccess).on('error', error);
+  }
+  catch (e) {
+    res.status(400).end();
+  }
 
+});
+
+app.get('*', (req, res) => {
+  res.status(200).end();
 });
 
 app.listen(80);
